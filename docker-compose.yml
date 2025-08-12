@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  leaves-manager:
+    build: .
+    container_name: mcp-leaves-manager
+    restart: unless-stopped
+    environment:
+      - MCP_LOG_LEVEL=info
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8000:8000"  # Expose port if needed for HTTP transport
+    volumes:
+      - ./data:/app/data  # Optional: mount data directory
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
